@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Function-First Crown Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap">
+<style>
+* { margin: 0 }
+body { font: 32px/1.2 sans-serif }
+#stage > section { width: 1920px; height: 1080px; overflow: hidden; box-sizing: border-box; position: absolute; left: 0; top: 0; isolation: isolate }
+aside, noscript { display: none !important }
+h1 { font-size: 96px; font-weight: 600 }
+h2 { font-size: 64px; font-weight: 600 }
+h3 { font-size: 44px; font-weight: 600 }
+p, li, h1, h2, h3, td, th { overflow-wrap: break-word }
+table { width: 100%; border-collapse: separate; border-spacing: 0; border: solid #0003; border-width: 2px 0 0 2px }
+th, td { padding: .35em .6em; text-align: left; border: solid #0003; border-width: 0 2px 2px 0 }
+x-shape, x-icon { display: block }
+x-shape[kind="arrow-right"] { clip-path: polygon(0 30%, 60% 30%, 60% 0, 100% 50%, 60% 100%, 60% 70%, 0 70%) }
+</style>
+<style>body { font-family: 'Inter', Arial, sans-serif; color: #15202B; }
+
+section {
+  padding: 128px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  color: #15202B;
+  background: #F6F4EF;
+}
+section.paper { background: #F6F4EF; }
+section.paper2 { background: #ECE8DF; }
+section.dark { background: #15202B; color: #F3EFE6; }
+section.cover { justify-content: flex-end; }
+
+h1, h2, h3 { font-family: 'Space Grotesk', Arial, sans-serif; color: #15202B; }
+h2 { font-size: 60px; font-weight: 600; line-height: 1.1; letter-spacing: -0.5px; }
+h3 { font-size: 32px; font-weight: 600; line-height: 1.15; }
+
+/* Cover */
+.cover-art { position: absolute; left: 1180px; top: 150px; width: 560px; height: 460px; }
+.cover-text { width: 1000px; display: flex; flex-direction: column; gap: 24px; }
+.cover-eyebrow { font-size: 24px; font-weight: 600; letter-spacing: 2px; line-height: 1.3; color: #9DBBDA; }
+.cover-title { font-size: 104px; font-weight: 600; line-height: 1.02; letter-spacing: -1.5px; color: #F3EFE6; }
+.cover-lede { font-size: 32px; line-height: 1.4; color: #C4CDD6; }
+.cover-foot { font-size: 24px; line-height: 1.3; color: #9AA6B2; margin-top: 24px; }
+
+/* Slide heading */
+.head { display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
+.eyebrow { font-size: 24px; font-weight: 600; letter-spacing: 2px; line-height: 1.3; color: #23609E; }
+.lede { font-size: 28px; line-height: 1.4; color: #4A5260; margin-top: 4px; }
+
+/* Role tags */
+.tag { font-size: 24px; font-weight: 600; letter-spacing: 1.5px; line-height: 1.3; }
+.tag.rule { color: #23609E; }
+.tag.learn { color: #8F480A; }
+.tag.data { color: #59655F; }
+
+/* Method cards */
+.cards3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
+.card { padding: 36px 40px 40px; display: flex; flex-direction: column; gap: 16px; }
+.card.rule { background: #DCE6F1; border-top: 8px solid #23609E; }
+.card.learn { background: #F4E1CB; border-top: 8px solid #8F480A; }
+.card-d { font-size: 28px; line-height: 1.4; color: #15202B; }
+.card-hr { border: none; border-top: 2px solid #B8B1A3; margin: 4px 0; }
+.card-out { font-size: 24px; line-height: 1.35; color: #4A5260; }
+
+/* Pipeline blocks */
+.flow { display: flex; flex-direction: row; align-items: stretch; }
+.blk { flex: 0 0 288px; box-sizing: border-box; display: flex; flex-direction: column; gap: 6px; padding: 16px 20px 20px; }
+.blk.wide { flex: 0 0 324px; }
+.blk.rule { background: #DCE6F1; border-top: 6px solid #23609E; }
+.blk.learn { background: #F4E1CB; border-top: 6px solid #8F480A; }
+.blk.data { background: #E2E0D8; border-top: 6px solid #59655F; }
+.blk.focus { box-shadow: 0 0 0 4px #8F480A; }
+.blk-t { font-size: 28px; font-weight: 600; line-height: 1.15; }
+.blk-d { font-size: 24px; line-height: 1.35; color: #4A5260; }
+.arw { flex: 0 0 56px; display: flex; align-items: center; justify-content: center; }
+.arw-s { width: 32px; height: 16px; background: #8A8478; }
+.return { width: 1664px; height: 56px; }
+.legend { display: flex; flex-direction: row; gap: 40px; align-items: center; margin-top: 32px; }
+.lg { display: flex; flex-direction: row; align-items: center; gap: 12px; }
+.lg-sw { width: 24px; height: 24px; }
+.lg-sw.rule { background: #23609E; }
+.lg-sw.learn { background: #8F480A; }
+.lg-sw.data { background: #59655F; }
+.lg-t { font-size: 24px; line-height: 1.3; color: #4A5260; }
+
+/* Model lanes */
+.lane { display: flex; flex-direction: row; align-items: stretch; }
+.lane-gap { margin-top: 28px; }
+.lane-l { flex: 0 0 200px; box-sizing: border-box; padding-right: 24px; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+.lane-s { font-size: 24px; line-height: 1.35; color: #4A5260; }
+.objective { margin-top: 28px; background: #15202B; padding: 24px 32px; display: flex; flex-direction: row; align-items: center; gap: 40px; }
+.obj-f { font-family: 'Space Grotesk', Arial, sans-serif; font-size: 32px; font-weight: 500; line-height: 1.3; color: #F3EFE6; white-space: nowrap; }
+.obj-d { font-size: 24px; line-height: 1.35; color: #C4CDD6; }
+
+/* Comparison slides */
+.cmp { display: grid; grid-template-columns: 1fr 1fr 1.1fr; gap: 28px; }
+.opt { padding: 32px 36px 36px; display: flex; flex-direction: column; gap: 14px; background: #F4E1CB; border-top: 8px solid #8F480A; }
+.panel { padding: 32px 36px 36px; display: flex; flex-direction: column; gap: 14px; background: #DCE6F1; border-top: 8px solid #23609E; }
+.pts { font-size: 28px; line-height: 1.35; color: #15202B; padding-left: 32px; }
+.pts li { margin-bottom: 12px; }
+.decide { margin-top: 28px; padding: 20px 32px; background: #15202B; }
+.decide-t { font-size: 28px; line-height: 1.4; color: #F3EFE6; }
+.hl { color: #9DBBDA; }
+
+/* Test tables */
+.tbl { width: 100%; font-size: 24px; line-height: 1.35; color: #15202B; }
+.tbl td, .tbl th { padding: 14px 18px; }
+.tbl-h { background: #15202B; }
+.tbl-hc { color: #F3EFE6; font-weight: 600; }
+.band { background: #F6F4EF; }
+.w-block { width: 22%; }
+.w-test { width: 44%; }
+.w-meas { width: 34%; }
+
+/* Experiment order */
+.steps { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+.stp { background: #FBFAF6; padding: 28px; display: flex; flex-direction: row; gap: 20px; border-top: 6px solid #23609E; }
+.stp.learn { border-top: 6px solid #8F480A; }
+.stp-n { font-family: 'Space Grotesk', Arial, sans-serif; font-size: 60px; font-weight: 600; line-height: 1; color: #23609E; flex: 0 0 48px; }
+.stp-n.learn { color: #8F480A; }
+.stp-body { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.stp-t { font-size: 28px; font-weight: 600; line-height: 1.2; }
+.stp-d { font-size: 24px; line-height: 1.35; color: #4A5260; }
+.gate { font-size: 24px; line-height: 1.35; color: #23609E; margin-top: 4px; }
+.foot-note { margin-top: 28px; font-size: 24px; line-height: 1.35; color: #4A5260; }
+</style>
+<style>
+html, body { height: 100%; overflow: hidden; background: #0B1117; }
+#viewport { position: fixed; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; }
+body.notes-on #viewport { bottom: 30vh; }
+#stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: center center; box-shadow: 0 10px 40px #0008; }
+#stage > section { display: none !important; }
+#stage > section.active { display: flex !important; }
+#notes { position: fixed; left: 0; right: 0; bottom: 0; height: 30vh; box-sizing: border-box; padding: 16px 24px; overflow: auto; background: #151E27; border-top: 1px solid #2B3947; color: #DDE3EA; font: 18px/1.5 Inter, Arial, sans-serif; display: none; }
+body.notes-on #notes { display: block; }
+#notes-h { font-size: 13px; letter-spacing: 1.5px; color: #8FA3B6; margin-bottom: 6px; }
+#bar { position: absolute; right: 16px; bottom: 12px; display: flex; gap: 6px; align-items: center; opacity: .35; transition: opacity .2s; font: 14px/1 Inter, Arial, sans-serif; }
+#bar:hover, body.moving #bar { opacity: 1; }
+#bar button { font: inherit; color: #E9EEF3; background: #1E2A36; border: 1px solid #34465A; border-radius: 6px; padding: 7px 10px; cursor: pointer; }
+#bar button:hover { background: #2A3A4B; }
+#count { color: #C9D3DD; min-width: 56px; text-align: center; }
+@media print {
+  @page { size: 1920px 1080px; margin: 0; }
+  html, body { height: auto; overflow: visible; background: none; }
+  #bar, #notes { display: none !important; }
+  #viewport { position: static; }
+  #stage { position: static; transform: none !important; width: auto; height: auto; box-shadow: none; }
+  #stage > section, #stage > section.active { display: flex !important; position: relative; break-after: page; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+<div id="viewport">
+<div id="stage">
+<section id="cover" class="dark cover">
+<svg class="cover-art" width="560" height="460" viewBox="0 0 560 460" xmlns="http://www.w3.org/2000/svg" aria-label="A crown cross-section meeting the opposing tooth at three contact points, with the opposing tooth’s movement path drawn as a dashed arrow">
+<path d="M110 20 C100 70 86 115 90 150 C94 180 130 196 180 196 C215 196 250 220 280 246 C310 220 345 196 380 196 C430 196 466 180 470 150 C474 115 460 70 450 20" fill="none" stroke="#7F9AB5" stroke-width="3" stroke-dasharray="10 8"/>
+<path d="M160 440 C150 390 105 345 105 290 C105 240 135 205 180 200 C215 196 245 240 280 250 C315 240 345 196 380 200 C425 205 455 240 455 290 C455 345 410 390 400 440 Z" fill="#22384D" stroke="#C9D6E3" stroke-width="3"/>
+<path d="M280 246 C330 226 390 206 466 200" fill="none" stroke="#E39B4F" stroke-width="3" stroke-dasharray="4 8" stroke-linecap="round"/>
+<polygon points="466,191 486,200 466,209" fill="#E39B4F"/>
+<circle cx="180" cy="198" r="9" fill="#E39B4F"/>
+<circle cx="380" cy="198" r="9" fill="#E39B4F"/>
+<circle cx="280" cy="248" r="9" fill="#E39B4F"/>
+</svg>
+<div class="cover-text">
+<p class="cover-eyebrow">CROWN DESIGN · METHOD, MODEL FLOW AND TESTS</p>
+<h1 class="cover-title">Function-first crown design</h1>
+<p class="cover-lede">The rules define what the crown must do. The model only fills in how it looks.</p>
+<p class="cover-foot">Research plan · November 2026</p>
+</div>
+
+</section>
+<section id="method" class="paper">
+<div class="head">
+<p class="eyebrow">THE METHOD</p>
+<h2>Define, fill, guarantee</h2>
+<p class="lede">Function-first reverses the usual order. The rules define what the crown must do; the learned model only decides how it looks.</p>
+</div>
+<div class="cards3">
+<div class="card rule">
+<p class="tag rule">1 · RULES</p>
+<h3>Define</h3>
+<p class="card-d">Derive what the crown must do from the patient’s scans and jaw movement: contacts, clearance, load axis, table width.</p>
+<hr class="card-hr">
+<p class="card-out"><b>Output:</b> a skeleton of points, paths and forbidden regions.</p>
+</div>
+<div class="card learn">
+<p class="tag learn">2 · LEARNED</p>
+<h3>Fill</h3>
+<p class="card-d">Find the most natural tooth that meets the skeleton. Function is the goal; the learned prior keeps it plausible.</p>
+<hr class="card-hr">
+<p class="card-out"><b>Output:</b> several candidate crowns.</p>
+</div>
+<div class="card rule">
+<p class="tag rule">3 · RULES</p>
+<h3>Guarantee</h3>
+<p class="card-d">SDF operations make fit, minimum thickness, bur radius and no interferences true by construction, as LEAP 71 does.</p>
+<hr class="card-hr">
+<p class="card-out"><b>Output:</b> crowns that pass every hard rule, then ranked by simulated wear and lifetime.</p>
+</div>
+</div>
+
+</section>
+<section id="pipeline" class="paper">
+<div class="head">
+<p class="eyebrow">THE FLOW</p>
+<h2>The pipeline, block by block</h2>
+</div>
+<div class="flow">
+<div class="blk data"><p class="tag data">01 · DATA</p><h3 class="blk-t">Inputs</h3><p class="blk-d">CBCT, scans of both jaws, bite record</p></div>
+<div class="arw"><x-shape kind="arrow-right" class="arw-s"></x-shape></div>
+<div class="blk learn"><p class="tag learn">02 · LEARNED</p><h3 class="blk-t">Segmentation</h3><p class="blk-d">Teeth, nerve, bone and condyles</p></div>
+<div class="arw"><x-shape kind="arrow-right" class="arw-s"></x-shape></div>
+<div class="blk rule"><p class="tag rule">03 · RULES</p><h3 class="blk-t">Jaw kinematics</h3><p class="blk-d">Joints, tooth guidance and wear facets</p></div>
+<div class="arw"><x-shape kind="arrow-right" class="arw-s"></x-shape></div>
+<div class="blk rule"><p class="tag rule">04 · RULES</p><h3 class="blk-t">Requirements</h3><p class="blk-d">Contacts, clearance, load axis, table width</p></div>
+<div class="arw"><x-shape kind="arrow-right" class="arw-s"></x-shape></div>
+<div class="blk rule"><p class="tag rule">05 · RULES</p><h3 class="blk-t">Skeleton</h3><p class="blk-d">Cusp tips, fossae, grooves, contact areas</p></div>
+</div>
+<svg class="return" width="1664" height="56" viewBox="0 0 1664 56" xmlns="http://www.w3.org/2000/svg" aria-label="The flow continues from block 5 to block 6">
+<path d="M1520 0 V28 H144 V42" fill="none" stroke="#8A8478" stroke-width="3"/>
+<polygon points="134,40 154,40 144,56" fill="#8A8478"/>
+</svg>
+<div class="flow">
+<div class="blk learn focus"><p class="tag learn">06 · LEARNED</p><h3 class="blk-t">Shape search</h3><p class="blk-d">DeepSDF latent search or diffusion</p></div>
+<div class="arw"><x-shape kind="arrow-right" class="arw-s"></x-shape></div>
+<div class="blk rule"><p class="tag rule">07 · RULES</p><h3 class="blk-t">Stage 3 rules</h3><p class="blk-d">Fit, thickness, bur radius, no interferences, margin</p></div>
+<div class="arw"><x-shape kind="arrow-right" class="arw-s"></x-shape></div>
+<div class="blk rule"><p class="tag rule">08 · RULES</p><h3 class="blk-t">Wear ranking</h3><p class="blk-d">Simulated wear and lifetime rank the candidates</p></div>
+<div class="arw"><x-shape kind="arrow-right" class="arw-s"></x-shape></div>
+<div class="blk rule"><p class="tag rule">09 · RULES</p><h3 class="blk-t">Implant and guide</h3><p class="blk-d">Implant axis set to the crown, then the guide</p></div>
+</div>
+<div class="legend">
+<div class="lg"><x-shape kind="rect" class="lg-sw rule"></x-shape><p class="lg-t">Rules and physics: derived, valid by construction</p></div>
+<div class="lg"><x-shape kind="rect" class="lg-sw learn"></x-shape><p class="lg-t">Learned from data</p></div>
+<div class="lg"><x-shape kind="rect" class="lg-sw data"></x-shape><p class="lg-t">Patient data</p></div>
+</div>
+
+</section>
+<section id="model" class="paper">
+<div class="head">
+<p class="eyebrow">BLOCK 06 · SHAPE SEARCH</p>
+<h2>Inside the shape search</h2>
+</div>
+<div class="lane">
+<div class="lane-l"><h3>Train once</h3><p class="lane-s">on intact arches</p></div>
+<div class="blk wide data"><p class="tag data">DATA</p><h3 class="blk-t">Intact teeth</h3><p class="blk-d">SDF samples per tooth, left and right mirrored</p></div>
+<div class="arw"><x-shape kind="arrow-right" class="arw-s"></x-shape></div>
+<div class="blk wide learn"><p class="tag learn">LEARNED</p><h3 class="blk-t">DeepSDF decoder</h3><p class="blk-d">f(type, code, point) gives the signed distance</p></div>
+<div class="arw"><x-shape kind="arrow-right" class="arw-s"></x-shape></div>
+<div class="blk wide learn"><p class="tag learn">LEARNED</p><h3 class="blk-t">Per-type prior</h3><p class="blk-d">Mean code and spread for each tooth type</p></div>
+<div class="arw"><x-shape kind="arrow-right" class="arw-s"></x-shape></div>
+<div class="blk wide learn"><p class="tag learn">LEARNED</p><h3 class="blk-t">Arch model</h3><p class="blk-d">Predicts a masked tooth’s code from its neighbours</p></div>
+</div>
+<div class="lane lane-gap">
+<div class="lane-l"><h3>Per case</h3><p class="lane-s">for each patient</p></div>
+<div class="blk wide data"><p class="tag data">DATA</p><h3 class="blk-t">Neighbour teeth</h3><p class="blk-d">Fit a code to each tooth that is present</p></div>
+<div class="arw"><x-shape kind="arrow-right" class="arw-s"></x-shape></div>
+<div class="blk wide learn"><p class="tag learn">LEARNED</p><h3 class="blk-t">Starting codes</h3><p class="blk-d">Arch model proposes several codes for the gap</p></div>
+<div class="arw"><x-shape kind="arrow-right" class="arw-s"></x-shape></div>
+<div class="blk wide rule"><p class="tag rule">RULE TESTS</p><h3 class="blk-t">Search loop</h3><p class="blk-d">Decode at test points, score, step code and pose</p></div>
+<div class="arw"><x-shape kind="arrow-right" class="arw-s"></x-shape></div>
+<div class="blk wide data"><p class="tag data">OUTPUT</p><h3 class="blk-t">Best candidates</h3><p class="blk-d">Lowest scores go on to Stage 3</p></div>
+</div>
+<div class="objective">
+<p class="obj-f">minimise L_function(z, pose) + λ‖z − μ_type‖²</p>
+<p class="obj-d">Function is the goal; the prior keeps the tooth close to its type, so it looks natural.</p>
+</div>
+
+</section>
+<section id="space" class="paper2">
+<div class="head">
+<p class="eyebrow">SHAPE SEARCH · TEST 1</p>
+<h2>Shape space: one model or one per tooth type</h2>
+</div>
+<div class="cmp">
+<div class="opt">
+<p class="tag learn">OPTION A · DEEPSDF</p>
+<h3>One model, all teeth</h3>
+<ul class="pts">
+<li>Tooth type is an input to one decoder</li>
+<li>Codes pulled to their type’s mean</li>
+<li>Shares what all teeth have in common</li>
+</ul>
+</div>
+<div class="opt">
+<p class="tag learn">OPTION B · DEEPSDF</p>
+<h3>A model per tooth type</h3>
+<ul class="pts">
+<li>A decoder and code space per type</li>
+<li>All capacity on one shape family</li>
+<li>14 models, fewer teeth to train each</li>
+</ul>
+</div>
+<div class="panel">
+<p class="tag rule">SAME TEST FOR BOTH</p>
+<h3>Fit held-out real teeth</h3>
+<ul class="pts">
+<li>F-score at 0.1, 0.2 and 0.3 mm</li>
+<li>Normal consistency and curvature</li>
+<li>Technician review of fissures</li>
+<li>Codes stay within their type</li>
+</ul>
+</div>
+</div>
+<div class="decide">
+<p class="decide-t"><b class="hl">Go / no-go:</b> if fissures vanish in the held-out fit, generation will lose them too.</p>
+</div>
+
+</section>
+<section id="generator" class="paper2">
+<div class="head">
+<p class="eyebrow">SHAPE SEARCH · TEST 2</p>
+<h2>Generator: latent search or diffusion</h2>
+</div>
+<div class="cmp">
+<div class="opt">
+<p class="tag learn">OPTION A</p>
+<h3>Latent search</h3>
+<ul class="pts">
+<li>Start at the type mean or the arch model’s guess</li>
+<li>Gradient steps on code and pose</li>
+<li>Vary: start, number of starts, prior weight</li>
+</ul>
+</div>
+<div class="opt">
+<p class="tag learn">OPTION B</p>
+<h3>Diffusion model</h3>
+<ul class="pts">
+<li>Transformer over per-tooth codes and poses</li>
+<li>Each step corrected by the point tests</li>
+<li>Vary: requirements as input, steps corrected</li>
+</ul>
+</div>
+<div class="panel">
+<p class="tag rule">SAME MEASURES FOR BOTH</p>
+<h3>Score every candidate</h3>
+<ul class="pts">
+<li>Function: contact error, clearance, load angle</li>
+<li>Stage 3 change by region (mm)</li>
+<li>Natural look and variety</li>
+<li>Time and correction budget</li>
+</ul>
+</div>
+</div>
+<div class="decide">
+<p class="decide-t"><b class="hl">Choose:</b> the smaller Stage 3 change at equal look, or diffusion to start and search to finish.</p>
+</div>
+
+</section>
+<section id="before" class="paper2">
+<div class="head">
+<p class="eyebrow">TESTS · BLOCKS 01–05</p>
+<h2>Tests before the shape search</h2>
+<p class="lede">Each block is tested on its own first, so a failure points to one block.</p>
+</div>
+<table class="tbl">
+<tr class="tbl-h"><th class="tbl-hc w-block">Block</th><th class="tbl-hc w-test">What we test</th><th class="tbl-hc w-meas">Measure</th></tr>
+<tr><td>01 Inputs</td><td>Register the CBCT to the intraoral scans and the bite</td><td>Surface distance between scanned and CBCT teeth (mm)</td></tr>
+<tr class="band"><td>02 Segmentation</td><td>Compare with expert labels; a five-model ensemble flags cases where the models disagree</td><td>Dice, surface distance (mm), nerve canal position error (mm)</td></tr>
+<tr><td>03 Jaw kinematics</td><td>CBCT-derived jaw paths against optical jaw tracking on a small cohort; design across the plausible joint range</td><td>Path error (mm, °); the crown clears every path in the range</td></tr>
+<tr class="band"><td>04–05 Requirements and skeleton</td><td>Derived contacts and paths against those a technician marks on the same cases</td><td>Contact position error (mm); every conflict reported, none traded silently</td></tr>
+</table>
+
+</section>
+<section id="after" class="paper2">
+<div class="head">
+<p class="eyebrow">TESTS · BLOCKS 07–09 AND END TO END</p>
+<h2>Tests after the shape search</h2>
+<p class="lede">The rules are measured on every output, not assumed.</p>
+</div>
+<table class="tbl">
+<tr class="tbl-h"><th class="tbl-hc w-block">Block</th><th class="tbl-hc w-test">What we test</th><th class="tbl-hc w-meas">Measure</th></tr>
+<tr><td>07 Stage 3 rules</td><td>Every rule on every crown: thickness above the minimum, cement gap in its band, no corner tighter than the bur, clear of the swept antagonist, margin on the traced line; contacts still touch</td><td>Pass or fail per rule; how far each operation moved the surface (mm by region)</td></tr>
+<tr class="band"><td>08 Wear ranking</td><td>Calibrate wear and fracture models on published data; rerun the ranking under input uncertainty (Monte Carlo)</td><td>Call a winner only when P(A outlasts B) &gt; 0.8</td></tr>
+<tr><td>09 Implant and guide</td><td>Safety distances at the planned pose, plus a probabilistic check for guided-surgery error; guide fit on printed models</td><td>Nerve ≥ 2 mm, roots ≥ 1.5 mm, implants ≥ 3 mm, sinus ≥ 1 mm</td></tr>
+<tr class="band"><td>End to end</td><td>Against today’s workflow, a CAD proposal finished by a technician, on the same cases</td><td>Technician edit distance (µm by region), design time, chairside adjustment</td></tr>
+</table>
+
+</section>
+<section id="order" class="paper">
+<div class="head">
+<p class="eyebrow">THE PLAN</p>
+<h2>Order of experiments</h2>
+</div>
+<div class="steps">
+<div class="stp">
+<p class="stp-n">1</p>
+<div class="stp-body">
+<h3 class="stp-t">Licence check</h3>
+<p class="stp-d">Read the Teeth3DS+ licence before any training.</p>
+<p class="gate"><b>Gate:</b> training allowed, or run it with an academic partner</p>
+</div>
+</div>
+<div class="stp">
+<p class="stp-n">2</p>
+<div class="stp-body">
+<h3 class="stp-t">Analytic baseline</h3>
+<p class="stp-d">An FDI 16 crown built from SDF primitives and passed through Stage 3. No training.</p>
+<p class="gate"><b>Outcome:</b> the bar the learned fill must beat</p>
+</div>
+</div>
+<div class="stp learn">
+<p class="stp-n learn">3</p>
+<div class="stp-body">
+<h3 class="stp-t">Shape space</h3>
+<p class="stp-d">DeepSDF for all teeth against one per type, on FDI 16/26; held-out fit test.</p>
+<p class="gate"><b>Gate:</b> fissures survive the fit</p>
+</div>
+</div>
+<div class="stp learn">
+<p class="stp-n learn">4</p>
+<div class="stp-body">
+<h3 class="stp-t">Latent search</h3>
+<p class="stp-d">Simulated cases with average jaw values first.</p>
+<p class="gate"><b>Gate:</b> requirements met with a small Stage 3 change</p>
+</div>
+</div>
+<div class="stp learn">
+<p class="stp-n learn">5</p>
+<div class="stp-body">
+<h3 class="stp-t">Diffusion against search</h3>
+<p class="stp-d">The same cases and measures as step 4.</p>
+<p class="gate"><b>Outcome:</b> choose the generator, or combine them</p>
+</div>
+</div>
+<div class="stp">
+<p class="stp-n">6</p>
+<div class="stp-body">
+<h3 class="stp-t">Patient jaw motion, then implants</h3>
+<p class="stp-d">CBCT-based kinematics checked against jaw tracking; then implant crowns with the implant axis.</p>
+<p class="gate"><b>Gate:</b> paths within tolerance, safety distances met</p>
+</div>
+</div>
+</div>
+<p class="foot-note">Every result is also compared with the fallback order: the prior proposes, the rules correct.</p>
+
+</section>
+</div>
+<div id="bar">
+<button id="prev" title="Previous (Left arrow)">&#8249;</button>
+<span id="count"></span>
+<button id="next" title="Next (Right arrow)">&#8250;</button>
+<button id="fbtn" title="Full screen (F)">Full screen</button>
+</div>
+</div>
+<script>
+(function () {
+  var stage = document.getElementById('stage');
+  var viewport = document.getElementById('viewport');
+  var slides = Array.prototype.slice.call(stage.children);
+  var count = document.getElementById('count');
+  var notesBody = document.getElementById('notes-body');
+  var i = 0;
+  function fit() {
+    var s = Math.min(viewport.clientWidth / 1920, viewport.clientHeight / 1080);
+    stage.style.transform = 'translate(-50%, -50%) scale(' + s + ')';
+  }
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function (s, k) { s.classList.toggle('active', k === i); });
+    count.textContent = (i + 1) + ' / ' + slides.length;
+    var a = slides[i].querySelector('aside');
+    if (notesBody) notesBody.textContent = a ? a.textContent : 'No notes on this slide.';
+    if (location.hash !== '#' + (i + 1)) history.replaceState(null, '', '#' + (i + 1));
+  }
+  function toggleNotes() { if (!notesBody) return; document.body.classList.toggle('notes-on'); fit(); }
+  function toggleFull() {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+  }
+  document.getElementById('prev').onclick = function (e) { e.stopPropagation(); show(i - 1); };
+  document.getElementById('next').onclick = function (e) { e.stopPropagation(); show(i + 1); };
+  var nbtn = document.getElementById('nbtn');
+  if (nbtn) nbtn.onclick = function (e) { e.stopPropagation(); toggleNotes(); };
+  document.getElementById('fbtn').onclick = function (e) { e.stopPropagation(); toggleFull(); };
+  viewport.addEventListener('click', function (e) {
+    if (e.target.closest('#bar')) return;
+    var r = viewport.getBoundingClientRect();
+    show(e.clientX - r.left < r.width / 3 ? i - 1 : i + 1);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var k = e.key;
+    if (k === 'ArrowRight' || k === 'PageDown' || k === ' ' || k === 'Enter' || k === 'ArrowDown') { show(i + 1); e.preventDefault(); }
+    else if (k === 'ArrowLeft' || k === 'PageUp' || k === 'Backspace' || k === 'ArrowUp') { show(i - 1); e.preventDefault(); }
+    else if (k === 'Home') show(0);
+    else if (k === 'End') show(slides.length - 1);
+    else if (k === 'f' || k === 'F') toggleFull();
+    else if (k === 'n' || k === 'N') toggleNotes();
+  });
+  var x0 = null;
+  viewport.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  viewport.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 40) show(dx < 0 ? i + 1 : i - 1);
+  });
+  var t = null;
+  document.addEventListener('mousemove', function () {
+    document.body.classList.add('moving'); clearTimeout(t);
+    t = setTimeout(function () { document.body.classList.remove('moving'); }, 1500);
+  });
+  window.addEventListener('resize', fit);
+  window.addEventListener('hashchange', function () { show((parseInt(location.hash.slice(1), 10) || 1) - 1); });
+  fit();
+  show((parseInt(location.hash.slice(1), 10) || 1) - 1);
+})();
+</script>
+</body>
+</html>
